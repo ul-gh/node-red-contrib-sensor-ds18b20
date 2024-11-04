@@ -7,7 +7,8 @@
             topic: {value:""},
             sensorid: {value:"", required:true},
             timer: {value:"1", required:true, validate:RED.validators.number()},
-            repeat: {value: false}
+            repeat: {value: false},
+            payload_is_object: {value: false}
         },
         inputs: 1,
         outputs: 1,
@@ -43,7 +44,11 @@
     <div class="form-row">
       <label for="node-input-name"><i class="icon-ok"></i>Periodic</label>
       <input type="checkbox" id="node-input-repeat">
-      </div>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-ok"></i>Output msg.payload is object (including sensor ID)</label>
+        <input type="checkbox" id="node-input-payload_is_object">
+    </div>
     <div class="form-row">
         <label for="node-input-timer"><i class="fa fa-repeat"></i> Period (secs)</label>
         <input type="text" id="node-input-timer" placeholder="1">

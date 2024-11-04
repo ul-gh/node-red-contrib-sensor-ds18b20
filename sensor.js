@@ -6,6 +6,7 @@ module.exports = function(RED) {
         RED.nodes.createNode(this, config);
         this.sensorid = config.sensorid;
         this.repeat = config.repeat;
+        this.payload_is_object = config.payload_is_object;
         // user input is in seconds, this is conversion to miliseconds
         this.timer = config.timer * 1000;
         this.topic = config.name; 
@@ -24,8 +25,11 @@ module.exports = function(RED) {
                     else
                         topic = input_msg.topic;
                 }
-
-                var msg = { ...input_msg, payload: value, topic: topic };
+                if (node.payload_is_object) {
+                    var msg = { ...input_msg, payload: {id: node.sensorid, value}, topic: topic };
+                } else {
+                    var msg = { ...input_msg, payload: value, topic: topic };
+                }
                 node.send(msg);
             });
         }
